@@ -23,6 +23,11 @@ public class HandlerResolverTest {
     }
 
     @Test
+    public void should_throw_when_given_a_string_contains_non_valid_class_name(){
+
+    }
+
+    @Test
     public void should_return_proper_controller_name_when_given_proper_url(){
         //Act
         handlerResolver.setUrl("controllerName/methodeName");
