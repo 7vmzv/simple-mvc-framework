@@ -6,9 +6,10 @@ public class HandlerResolver {
     private String methode;
 
     public String getHandler(){
-        if(url.equals("")) {
+        if(url == null || url.equals("")) {
             return "ErrorController";
         }
+
         splitTheUrlAndResolveControllerAndMethod();
         return controller.substring(0, 1).toUpperCase() + controller.substring(1) + "Controller";
     }

@@ -2,8 +2,12 @@ package org.smvcf.resolvers;
 
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+import org.smvcf.exceptions.InvalidControllerNameException;
+import org.smvcf.url.UrlConventions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * ProperUrl definition : /controllerName/methodeName
@@ -24,6 +28,19 @@ public class HandlerResolverTest {
 
     @Test
     public void should_throw_when_given_a_string_contains_non_valid_class_name(){
+        //Act
+        handlerResolver.setUrl("9ontroller/methodeName");
+        String actual = handlerResolver.getHandler();
+
+        //Assert
+        assertThrows(InvalidControllerNameException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                if (!actual.matches(UrlConventions.CONTROLLER_NAME_FORMAT)){
+                    throw new InvalidControllerNameException();
+                }
+            }
+        });
 
     }
 
